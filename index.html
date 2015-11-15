@@ -1,84 +1,81 @@
-var Firebase = require("firebase");
-var myRef  = new Firebase("https://csc591-006.firebaseio.com/");
-var trackWord;
-var hadoopCount = 0;
-var stormCount = 0;
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to CSC 591 - Data Intensive Computing</title>
+	<script type="text/javascript", src = "wordCountBuild.js">
+	</script>
+</head>
+<body bgcolor="#E6E6FF">
+<br>
+<br>
+<br>
+<h1 align="center">
+	Data Intensive Computing - CSC591-006
+</h1>
+<h3 align="center">
+	Team # 3
+	<br>
+	Nitin Tak: ntak
+	<br>
+	Pratyush Oak: {}
+	<br>
+	Sakthi: {}
+	<br>
+	Yogesh: {}
+</h3>
+<h2 align="center">
+	<u> Lambda Architecture using Hadoop and Storm
+	</u>
+</h2>
 
-document.addEventListener("DOMContentLoaded", function(event) {
-Initialize();
-});
+<br>
+<br>
+	
+<table border="2" width="80%" align="center">
+	<tr align="center">
+		<td width="50%">
+			Enter word: <input type="text" name="TrackWord" id="trackWord">
+		</td>
+		<td width="50%">
+			<button id="btnGetWordCount">
+				Track Count
+			</button>
+		</td>
+	</tr>
+	<tr>
+		<th>
+			Count from Storm:
+		</th>
+		<th>
+			Count from Hadoop:
+		</th>
+	</tr>
+	<tr align="center">
+		<td>
+			<b>
+				<label id="wordCount_Storm" ></label>
+			</b>
+		</td>
+		<td>
+			<b>
+				<label id="wordCount_Hadoop"></label>			
+			</b>
+		</td>
+	</tr>
 
-function Initialize()
-{
-    console.log('Initializing control with event..');
-    var btnGetWordCount = document.getElementById("btnGetWordCount");
-    if(btnGetWordCount)
-    {
-        btnGetWordCount.addEventListener('click', getWordCount);
-    }
-}
+	<tr align="center">
+		<td>
+			<h3>
+				Total Count: 
+			</h3>
+		</td>
+		<td>
+			<h3>
+				<label id="totalCount"></label>			
+			</h3>
+		</td>
+	</tr>
 
-function getWordCount()
-{	
-	//TODO
-	//to validate the input text value as only word..
-	document.getElementById("wordCount_Storm").innerHTML = 0;
-	document.getElementById("wordCount_Hadoop").innerHTML = 0;
-	document.getElementById("totalCount").innerHTML = 0;
-	// alert("buttonc clicked..");
-
-	trackWord = document.getElementById("trackWord").value;
-	console.log("getting word count for : " + trackWord);
-
-	myRef.child("HadoopResults").ref().on("child_changed", function(snapshot){
-		// alert(snapshot.key());
-		console.log(snapshot.key());
-		if(snapshot.key() == trackWord)
-		{
-			console.log("value changed to : " + snapshot.val());
-			document.getElementById("wordCount_Hadoop").innerHTML = snapshot.val();
-			hadoopCount = parseInt(snapshot.val());
-			document.getElementById("totalCount").innerHTML = hadoopCount + stormCount;
-		}
-	});
-
-	myRef.child("HadoopResults").ref().on("child_added", function(snapshot){
-		// alert(snapshot.key());
-		console.log(snapshot.key());
-		if(snapshot.key() == trackWord)
-		{
-			console.log("value added as : " + snapshot.val());
-			document.getElementById("wordCount_Hadoop").innerHTML = snapshot.val();
-			hadoopCount = parseInt(snapshot.val());
-			document.getElementById("totalCount").innerHTML = hadoopCount + stormCount;
-		}
-	});
-
-
-	myRef.child("StormResults").ref().on("child_changed", function(snapshot){
-		// alert(snapshot.key());
-		console.log(snapshot.key());
-		if(snapshot.key() == trackWord)
-		{
-			console.log("value changed to : " + snapshot.val());
-			document.getElementById("wordCount_Storm").innerHTML = snapshot.val();
-			stormCount = parseInt(snapshot.val());
-			document.getElementById("totalCount").innerHTML = hadoopCount + stormCount;
-		}
-	});
-
-	myRef.child("StormResults").ref().on("child_added", function(snapshot){
-		// alert(snapshot.key());
-		console.log(snapshot.key());
-		if(snapshot.key() == trackWord)
-		{
-			console.log("value added as : " + snapshot.val());
-			document.getElementById("wordCount_Storm").innerHTML = snapshot.val();
-			stormCount = parseInt(snapshot.val());
-			document.getElementById("totalCount").innerHTML = hadoopCount + stormCount;
-		}
-	});
-
-	myRef.child("FirebaseConnection").set("SUCCESS");
-}
-
+</table>
+</body>
+</html>
