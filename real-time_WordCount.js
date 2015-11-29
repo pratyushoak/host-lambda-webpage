@@ -4,6 +4,7 @@ var trackWord;
 var hadoopCount = 0;
 var stormCount = 0;
 
+
 document.addEventListener("DOMContentLoaded", function(event) {
 Initialize();
 });
@@ -24,6 +25,9 @@ function getWordCount()
 	//to validate the input text value as only word..
 	document.getElementById("wordCount_Storm").innerHTML = 0;
 	document.getElementById("wordCount_Hadoop").innerHTML = 0;
+	document.getElementById("totalCount").innerHTML = 0;
+	hadoopCount = 0;
+	stormCount = 0;
 	// alert("buttonc clicked..");
 
 	trackWord = document.getElementById("trackWord").value;
